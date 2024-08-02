@@ -66,13 +66,13 @@ class Sql:
                                          f'UID={user_name};'
                                          f'PWD={password}')
 
-    def show(self, comment):
+    def show(self):
         cursor = self.connection.cursor()
-        cursor.execute(comment)
+        cursor.execute('select * from studentdata ')
         dataframe = cursor.fetchall()
         for data in dataframe:
             df = (list(data))
-            print(df)
+            print(pd.DataFrame(df))
 
 
 def menu1():
@@ -84,8 +84,6 @@ def menu1():
 def menu2():
     print('to insert your data in table press 1')
     print('to select a table press 2')
-    print('to update a your name or any press 3')
-    print('to delete any data or cell press 4')
 
 
 while True:
@@ -111,6 +109,10 @@ while True:
                 sachin.connection.commit()
                 print('data inserted in database')
                 break
+            if choice ==2:
+                sachin.show()
+                break
+        break
     elif choice == 2:
         print('Exited')
         break
